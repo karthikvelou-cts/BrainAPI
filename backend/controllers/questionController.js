@@ -4,11 +4,14 @@ import Question from "../models/Question.js";
 import Category from "../models/Category.js";
 import Token from "../models/Token.js";
 import { apiResponse, getPagination, parseAmount } from "../utils/helpers.js";
+import { validateQuestionContentSafety } from "../utils/contentSafety.js";
 
 const transformQuestion = (questionDoc) => ({
   _id: questionDoc._id,
   category: questionDoc.category?.name || "Unknown",
   categoryId: questionDoc.category?._id,
+  createdBy: questionDoc.createdBy?.username || "Unknown",
+  createdById: questionDoc.createdBy?._id,
   type: questionDoc.type,
   difficulty: questionDoc.difficulty,
   question: questionDoc.question,
@@ -112,6 +115,7 @@ export const getQuestions = async (req, res) => {
   const [questions, total] = await Promise.all([
     Question.find(filter)
       .populate("category", "name")
+      .populate("createdBy", "username")
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(Math.min(meta.limit, requestedAmount)),
@@ -133,6 +137,11 @@ export const getQuestions = async (req, res) => {
 };
 
 export const createQuestion = async (req, res) => {
+  const unsafe = validateQuestionContentSafety(req.body);
+  if (unsafe) {
+    return res.status(400).json(unsafe);
+  }
+
   const categoryExists = await Category.exists({ _id: req.body.category });
   if (!categoryExists) {
     return res.status(400).json({ message: "Category does not exist" });
@@ -162,6 +171,7 @@ export const getMyQuestions = async (req, res) => {
   const [questions, total] = await Promise.all([
     Question.find({ createdBy: req.user._id })
       .populate("category", "name")
+      .populate("createdBy", "username")
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(meta.limit),
@@ -180,6 +190,11 @@ export const getMyQuestions = async (req, res) => {
 };
 
 export const createMyQuestion = async (req, res) => {
+  const unsafe = validateQuestionContentSafety(req.body);
+  if (unsafe) {
+    return res.status(400).json(unsafe);
+  }
+
   const categoryExists = await Category.exists({ _id: req.body.category });
   if (!categoryExists) {
     return res.status(400).json({ message: "Category does not exist" });
@@ -204,6 +219,15 @@ export const updateQuestion = async (req, res) => {
   const existing = await Question.findById(req.params.id);
   if (!existing) {
     return res.status(404).json({ message: "Question not found" });
+  }
+
+  const unsafe = validateQuestionContentSafety({
+    question: req.body.question ?? existing.question,
+    correct_answer: req.body.correct_answer ?? existing.correct_answer,
+    incorrect_answers: req.body.incorrect_answers ?? existing.incorrect_answers,
+  });
+  if (unsafe) {
+    return res.status(400).json(unsafe);
   }
 
   if (req.body.category) {
@@ -241,6 +265,15 @@ export const updateMyQuestion = async (req, res) => {
   const existing = await Question.findOne({ _id: req.params.id, createdBy: req.user._id });
   if (!existing) {
     return res.status(404).json({ message: "Question not found" });
+  }
+
+  const unsafe = validateQuestionContentSafety({
+    question: req.body.question ?? existing.question,
+    correct_answer: req.body.correct_answer ?? existing.correct_answer,
+    incorrect_answers: req.body.incorrect_answers ?? existing.incorrect_answers,
+  });
+  if (unsafe) {
+    return res.status(400).json(unsafe);
   }
 
   if (req.body.category) {
@@ -283,6 +316,14 @@ export const importQuestions = async (req, res) => {
   const docs = [];
 
   for (const q of questions) {
+    const unsafe = validateQuestionContentSafety(q);
+    if (unsafe) {
+      return res.status(400).json({
+        message: unsafe.message,
+        question: q.question || "Invalid question payload",
+      });
+    }
+
     let categoryId = q.category;
 
     if (!mongoose.Types.ObjectId.isValid(categoryId)) {
