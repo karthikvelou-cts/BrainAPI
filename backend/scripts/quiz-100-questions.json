@@ -1,0 +1,1136 @@
+{
+  "questions": [
+    {
+      "category": "69a920743f2cce5e79e343ac",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "The chemical symbol for Hydrogen is H.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ac",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the chemical symbol for Oxygen?",
+      "correct_answer": "O",
+      "incorrect_answers": [
+        "H",
+        "C",
+        "Na"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ac",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What is the chemical symbol for Carbon?",
+      "correct_answer": "C",
+      "incorrect_answers": [
+        "H",
+        "O",
+        "Na"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ac",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "The chemical symbol for Sodium is K.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ac",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the chemical symbol for Potassium?",
+      "correct_answer": "K",
+      "incorrect_answers": [
+        "H",
+        "O",
+        "C"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ac",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What is the chemical symbol for Iron?",
+      "correct_answer": "Fe",
+      "incorrect_answers": [
+        "H",
+        "O",
+        "C"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ac",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "The chemical symbol for Gold is Au.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ac",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the chemical symbol for Silver?",
+      "correct_answer": "Ag",
+      "incorrect_answers": [
+        "H",
+        "O",
+        "C"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ac",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What is the chemical symbol for Calcium?",
+      "correct_answer": "Ca",
+      "incorrect_answers": [
+        "H",
+        "O",
+        "C"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ac",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "The chemical symbol for Chlorine is He.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ac",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the chemical symbol for Helium?",
+      "correct_answer": "He",
+      "incorrect_answers": [
+        "H",
+        "O",
+        "C"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ac",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What is the chemical symbol for Nitrogen?",
+      "correct_answer": "N",
+      "incorrect_answers": [
+        "H",
+        "O",
+        "C"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ac",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "The chemical symbol for Magnesium is Mg.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ac",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the chemical symbol for Zinc?",
+      "correct_answer": "Zn",
+      "incorrect_answers": [
+        "H",
+        "O",
+        "C"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ac",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What is the chemical symbol for Copper?",
+      "correct_answer": "Cu",
+      "incorrect_answers": [
+        "H",
+        "O",
+        "C"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ad",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "World War II ended happened in 1945.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ad",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "In which year did this event occur: Berlin Wall fell?",
+      "correct_answer": "1989",
+      "incorrect_answers": [
+        "1945",
+        "1776",
+        "1789"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ad",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "In which year did this event occur: US Declaration of Independence?",
+      "correct_answer": "1776",
+      "incorrect_answers": [
+        "1945",
+        "1989",
+        "1789"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ad",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "French Revolution began happened in 1969.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ad",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "In which year did this event occur: Apollo 11 Moon landing?",
+      "correct_answer": "1969",
+      "incorrect_answers": [
+        "1945",
+        "1989",
+        "1776"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ad",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "In which year did this event occur: Magna Carta signed?",
+      "correct_answer": "1215",
+      "incorrect_answers": [
+        "1945",
+        "1989",
+        "1776"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ad",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "India became independent happened in 1947.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ad",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "In which year did this event occur: Titanic sank?",
+      "correct_answer": "1912",
+      "incorrect_answers": [
+        "1945",
+        "1989",
+        "1776"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ad",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "In which year did this event occur: Printing press popularized by Gutenberg?",
+      "correct_answer": "1450",
+      "incorrect_answers": [
+        "1945",
+        "1989",
+        "1776"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ad",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "Roman Empire fell (West) happened in 1066.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ad",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "In which year did this event occur: Battle of Hastings?",
+      "correct_answer": "1066",
+      "incorrect_answers": [
+        "1945",
+        "1989",
+        "1776"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ad",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "In which year did this event occur: Columbus reached the Americas?",
+      "correct_answer": "1492",
+      "incorrect_answers": [
+        "1945",
+        "1989",
+        "1776"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ad",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "UN founded happened in 1945.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ad",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "In which year did this event occur: Russian Revolution?",
+      "correct_answer": "1917",
+      "incorrect_answers": [
+        "1945",
+        "1989",
+        "1776"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ad",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "In which year did this event occur: Treaty of Versailles signed?",
+      "correct_answer": "1919",
+      "incorrect_answers": [
+        "1945",
+        "1989",
+        "1776"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ae",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "The acronym CPU stands for Central Processing Unit.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ae",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the full form of RAM?",
+      "correct_answer": "Random Access Memory",
+      "incorrect_answers": [
+        "Central Processing Unit",
+        "HyperText Transfer Protocol",
+        "HyperText Transfer Protocol Secure"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ae",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What is the full form of HTTP?",
+      "correct_answer": "HyperText Transfer Protocol",
+      "incorrect_answers": [
+        "Central Processing Unit",
+        "Random Access Memory",
+        "HyperText Transfer Protocol Secure"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ae",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "The acronym HTTPS stands for Uniform Resource Locator.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ae",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the full form of URL?",
+      "correct_answer": "Uniform Resource Locator",
+      "incorrect_answers": [
+        "Central Processing Unit",
+        "Random Access Memory",
+        "HyperText Transfer Protocol"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ae",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What is the full form of DNS?",
+      "correct_answer": "Domain Name System",
+      "incorrect_answers": [
+        "Central Processing Unit",
+        "Random Access Memory",
+        "HyperText Transfer Protocol"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ae",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "The acronym GPU stands for Graphics Processing Unit.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ae",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the full form of API?",
+      "correct_answer": "Application Programming Interface",
+      "incorrect_answers": [
+        "Central Processing Unit",
+        "Random Access Memory",
+        "HyperText Transfer Protocol"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ae",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What is the full form of SQL?",
+      "correct_answer": "Structured Query Language",
+      "incorrect_answers": [
+        "Central Processing Unit",
+        "Random Access Memory",
+        "HyperText Transfer Protocol"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ae",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "The acronym USB stands for HyperText Markup Language.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ae",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the full form of HTML?",
+      "correct_answer": "HyperText Markup Language",
+      "incorrect_answers": [
+        "Central Processing Unit",
+        "Random Access Memory",
+        "HyperText Transfer Protocol"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ae",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What is the full form of CSS?",
+      "correct_answer": "Cascading Style Sheets",
+      "incorrect_answers": [
+        "Central Processing Unit",
+        "Random Access Memory",
+        "HyperText Transfer Protocol"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ae",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "The acronym JSON stands for JavaScript Object Notation.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ae",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the full form of LAN?",
+      "correct_answer": "Local Area Network",
+      "incorrect_answers": [
+        "Central Processing Unit",
+        "Random Access Memory",
+        "HyperText Transfer Protocol"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343ae",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What is the full form of VPN?",
+      "correct_answer": "Virtual Private Network",
+      "incorrect_answers": [
+        "Central Processing Unit",
+        "Random Access Memory",
+        "HyperText Transfer Protocol"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343af",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "A soccer team fields 11 players at one time.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343af",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "How many players does one basketball team have on the field/court during normal play?",
+      "correct_answer": "5",
+      "incorrect_answers": [
+        "11",
+        "9",
+        "6"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343af",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "How many players does one baseball team have on the field/court during normal play?",
+      "correct_answer": "9",
+      "incorrect_answers": [
+        "11",
+        "5",
+        "6"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343af",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "A volleyball team fields 15 players at one time.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343af",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "How many players does one rugby union team have on the field/court during normal play?",
+      "correct_answer": "15",
+      "incorrect_answers": [
+        "11",
+        "5",
+        "9"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343af",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "How many players does one ice hockey team have on the field/court during normal play?",
+      "correct_answer": "6",
+      "incorrect_answers": [
+        "11",
+        "5",
+        "9"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343af",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "A kabaddi team fields 7 players at one time.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343af",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "How many players does one water polo team have on the field/court during normal play?",
+      "correct_answer": "7",
+      "incorrect_answers": [
+        "11",
+        "5",
+        "9"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343af",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "How many players does one cricket team have on the field/court during normal play?",
+      "correct_answer": "11",
+      "incorrect_answers": [
+        "5",
+        "9",
+        "6"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343af",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "A handball team fields 5 players at one time.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343af",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "How many players does one futsal team have on the field/court during normal play?",
+      "correct_answer": "5",
+      "incorrect_answers": [
+        "11",
+        "9",
+        "6"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343af",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "How many players does one field hockey team have on the field/court during normal play?",
+      "correct_answer": "11",
+      "incorrect_answers": [
+        "5",
+        "9",
+        "6"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343af",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "A netball team fields 7 players at one time.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343af",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "How many players does one lacrosse (field) team have on the field/court during normal play?",
+      "correct_answer": "10",
+      "incorrect_answers": [
+        "11",
+        "5",
+        "9"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343af",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "How many players does one American football team have on the field/court during normal play?",
+      "correct_answer": "11",
+      "incorrect_answers": [
+        "5",
+        "9",
+        "6"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b0",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "The capital of France is Paris.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b0",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the capital of Japan?",
+      "correct_answer": "Tokyo",
+      "incorrect_answers": [
+        "Paris",
+        "New Delhi",
+        "Ottawa"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b0",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What is the capital of India?",
+      "correct_answer": "New Delhi",
+      "incorrect_answers": [
+        "Paris",
+        "Tokyo",
+        "Ottawa"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b0",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "The capital of Canada is Brasilia.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b0",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the capital of Brazil?",
+      "correct_answer": "Brasilia",
+      "incorrect_answers": [
+        "Paris",
+        "Tokyo",
+        "New Delhi"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b0",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What is the capital of Australia?",
+      "correct_answer": "Canberra",
+      "incorrect_answers": [
+        "Paris",
+        "Tokyo",
+        "New Delhi"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b0",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "The capital of Germany is Berlin.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b0",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the capital of Italy?",
+      "correct_answer": "Rome",
+      "incorrect_answers": [
+        "Paris",
+        "Tokyo",
+        "New Delhi"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b0",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What is the capital of Spain?",
+      "correct_answer": "Madrid",
+      "incorrect_answers": [
+        "Paris",
+        "Tokyo",
+        "New Delhi"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b0",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "The capital of Egypt is Nairobi.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b0",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the capital of Kenya?",
+      "correct_answer": "Nairobi",
+      "incorrect_answers": [
+        "Paris",
+        "Tokyo",
+        "New Delhi"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b0",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What is the capital of Argentina?",
+      "correct_answer": "Buenos Aires",
+      "incorrect_answers": [
+        "Paris",
+        "Tokyo",
+        "New Delhi"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b0",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "The capital of Thailand is Bangkok.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b0",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the capital of Norway?",
+      "correct_answer": "Oslo",
+      "incorrect_answers": [
+        "Paris",
+        "Tokyo",
+        "New Delhi"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b0",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What is the capital of Mexico?",
+      "correct_answer": "Mexico City",
+      "incorrect_answers": [
+        "Paris",
+        "Tokyo",
+        "New Delhi"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b1",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "Inception was directed by Christopher Nolan.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b1",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Who directed the film Titanic?",
+      "correct_answer": "James Cameron",
+      "incorrect_answers": [
+        "Christopher Nolan",
+        "Steven Spielberg",
+        "Quentin Tarantino"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b1",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "Who directed the film Jurassic Park?",
+      "correct_answer": "Steven Spielberg",
+      "incorrect_answers": [
+        "Christopher Nolan",
+        "James Cameron",
+        "Quentin Tarantino"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b1",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "Pulp Fiction was directed by Francis Ford Coppola.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b1",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Who directed the film The Godfather?",
+      "correct_answer": "Francis Ford Coppola",
+      "incorrect_answers": [
+        "Christopher Nolan",
+        "James Cameron",
+        "Steven Spielberg"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b1",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "Who directed the film Avatar?",
+      "correct_answer": "James Cameron",
+      "incorrect_answers": [
+        "Christopher Nolan",
+        "Steven Spielberg",
+        "Quentin Tarantino"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b1",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "Interstellar was directed by Christopher Nolan.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b1",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Who directed the film The Grand Budapest Hotel?",
+      "correct_answer": "Wes Anderson",
+      "incorrect_answers": [
+        "Christopher Nolan",
+        "James Cameron",
+        "Steven Spielberg"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b1",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "Who directed the film The Dark Knight?",
+      "correct_answer": "Christopher Nolan",
+      "incorrect_answers": [
+        "James Cameron",
+        "Steven Spielberg",
+        "Quentin Tarantino"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b1",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "E.T. was directed by Martin Scorsese.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b1",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Who directed the film The Wolf of Wall Street?",
+      "correct_answer": "Martin Scorsese",
+      "incorrect_answers": [
+        "Christopher Nolan",
+        "James Cameron",
+        "Steven Spielberg"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b1",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "Who directed the film Jaws?",
+      "correct_answer": "Steven Spielberg",
+      "incorrect_answers": [
+        "Christopher Nolan",
+        "James Cameron",
+        "Quentin Tarantino"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b1",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "Django Unchained was directed by Quentin Tarantino.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b2",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "The currency of United States is US Dollar.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b2",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the currency used in Japan?",
+      "correct_answer": "Yen",
+      "incorrect_answers": [
+        "US Dollar",
+        "Indian Rupee",
+        "Pound Sterling"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b2",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What is the currency used in India?",
+      "correct_answer": "Indian Rupee",
+      "incorrect_answers": [
+        "US Dollar",
+        "Yen",
+        "Pound Sterling"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b2",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "The currency of United Kingdom is Euro.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b2",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the currency used in European Union?",
+      "correct_answer": "Euro",
+      "incorrect_answers": [
+        "US Dollar",
+        "Yen",
+        "Indian Rupee"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b2",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What is the currency used in China?",
+      "correct_answer": "Yuan",
+      "incorrect_answers": [
+        "US Dollar",
+        "Yen",
+        "Indian Rupee"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b2",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "The currency of Russia is Ruble.",
+      "correct_answer": "True",
+      "incorrect_answers": [
+        "False"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b2",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the currency used in South Korea?",
+      "correct_answer": "Won",
+      "incorrect_answers": [
+        "US Dollar",
+        "Yen",
+        "Indian Rupee"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b2",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What is the currency used in Switzerland?",
+      "correct_answer": "Swiss Franc",
+      "incorrect_answers": [
+        "US Dollar",
+        "Yen",
+        "Indian Rupee"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b2",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "The currency of Australia is Canadian Dollar.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b2",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the currency used in Canada?",
+      "correct_answer": "Canadian Dollar",
+      "incorrect_answers": [
+        "US Dollar",
+        "Yen",
+        "Indian Rupee"
+      ]
+    },
+    {
+      "category": "69a920743f2cce5e79e343b2",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What is the currency used in Brazil?",
+      "correct_answer": "Brazilian Real",
+      "incorrect_answers": [
+        "US Dollar",
+        "Yen",
+        "Indian Rupee"
+      ]
+    }
+  ]
+}

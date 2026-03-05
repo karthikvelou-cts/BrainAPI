@@ -37,12 +37,12 @@ export const questionUpdateValidators = [
 export const questionIdValidator = [param("id").isMongoId().withMessage("Invalid question id")];
 
 export const getQuestionsValidators = [
-  query("amount").optional().isInt({ min: 1, max: 50 }).withMessage("amount must be between 1 and 50"),
-  query("category").optional().custom((value) => mongoose.Types.ObjectId.isValid(value) || value === "any").withMessage("Invalid category"),
-  query("difficulty").optional().isIn(["easy", "medium", "hard"]).withMessage("Invalid difficulty"),
-  query("type").optional().isIn(["multiple", "boolean"]).withMessage("Invalid type"),
-  query("page").optional().isInt({ min: 1 }).withMessage("page must be >= 1"),
-  query("limit").optional().isInt({ min: 1, max: 50 }).withMessage("limit must be 1..50"),
+  query("amount").optional({ values: "falsy" }).isInt({ min: 1, max: 50 }).withMessage("amount must be between 1 and 50"),
+  query("category").optional({ values: "falsy" }).custom((value) => mongoose.Types.ObjectId.isValid(value) || value === "any").withMessage("Invalid category"),
+  query("difficulty").optional({ values: "falsy" }).isIn(["easy", "medium", "hard"]).withMessage("Invalid difficulty"),
+  query("type").optional({ values: "falsy" }).isIn(["multiple", "boolean"]).withMessage("Invalid type"),
+  query("page").optional({ values: "falsy" }).isInt({ min: 1 }).withMessage("page must be >= 1"),
+  query("limit").optional({ values: "falsy" }).isInt({ min: 1, max: 50 }).withMessage("limit must be 1..50"),
 ];
 
 const validateOpenToken = async (token) => {

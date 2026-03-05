@@ -1,0 +1,164 @@
+{
+  "questions": [
+    {
+      "categoryName": "Science",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "What planet is known as the Red Planet?",
+      "correct_answer": "Mars",
+      "incorrect_answers": ["Venus", "Jupiter", "Mercury"]
+    },
+    {
+      "categoryName": "Science",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "Humans have 206 bones in the adult body.",
+      "correct_answer": "True",
+      "incorrect_answers": ["False"]
+    },
+    {
+      "categoryName": "Science",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the chemical symbol for gold?",
+      "correct_answer": "Au",
+      "incorrect_answers": ["Ag", "Gd", "Go"]
+    },
+    {
+      "categoryName": "History",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "Who was the first President of the United States?",
+      "correct_answer": "George Washington",
+      "incorrect_answers": ["Thomas Jefferson", "John Adams", "Abraham Lincoln"]
+    },
+    {
+      "categoryName": "History",
+      "type": "boolean",
+      "difficulty": "medium",
+      "question": "The Berlin Wall fell in 1989.",
+      "correct_answer": "True",
+      "incorrect_answers": ["False"]
+    },
+    {
+      "categoryName": "History",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "Which treaty ended World War I?",
+      "correct_answer": "Treaty of Versailles",
+      "incorrect_answers": ["Treaty of Paris", "Treaty of Rome", "Treaty of Vienna"]
+    },
+    {
+      "categoryName": "Technology",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "What does CPU stand for?",
+      "correct_answer": "Central Processing Unit",
+      "incorrect_answers": ["Computer Primary Unit", "Core Processing Utility", "Central Program Unit"]
+    },
+    {
+      "categoryName": "Technology",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "JavaScript is the same language as Java.",
+      "correct_answer": "False",
+      "incorrect_answers": ["True"]
+    },
+    {
+      "categoryName": "Technology",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Which company created the Vue.js framework?",
+      "correct_answer": "It was created by Evan You independently.",
+      "incorrect_answers": ["Google", "Meta", "Microsoft"]
+    },
+    {
+      "categoryName": "Sports",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "How many players are on the field for one soccer team during play?",
+      "correct_answer": "11",
+      "incorrect_answers": ["10", "9", "12"]
+    },
+    {
+      "categoryName": "Sports",
+      "type": "boolean",
+      "difficulty": "medium",
+      "question": "In tennis, 40-40 is called deuce.",
+      "correct_answer": "True",
+      "incorrect_answers": ["False"]
+    },
+    {
+      "categoryName": "Sports",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "Which country won the FIFA World Cup in 2014?",
+      "correct_answer": "Germany",
+      "incorrect_answers": ["Argentina", "Brazil", "Spain"]
+    },
+    {
+      "categoryName": "Geography",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "What is the capital city of Japan?",
+      "correct_answer": "Tokyo",
+      "incorrect_answers": ["Osaka", "Kyoto", "Nagoya"]
+    },
+    {
+      "categoryName": "Geography",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "The Nile is the longest river in the world.",
+      "correct_answer": "True",
+      "incorrect_answers": ["False"]
+    },
+    {
+      "categoryName": "Geography",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "Which is the largest desert on Earth?",
+      "correct_answer": "Antarctic Desert",
+      "incorrect_answers": ["Sahara Desert", "Gobi Desert", "Arabian Desert"]
+    },
+    {
+      "categoryName": "Entertainment",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "Which movie features the quote, 'I'll be back'?",
+      "correct_answer": "The Terminator",
+      "incorrect_answers": ["RoboCop", "Predator", "Die Hard"]
+    },
+    {
+      "categoryName": "Entertainment",
+      "type": "boolean",
+      "difficulty": "medium",
+      "question": "The TV series 'Friends' has 10 seasons.",
+      "correct_answer": "True",
+      "incorrect_answers": ["False"]
+    },
+    {
+      "categoryName": "Entertainment",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "Who composed the score for 'Interstellar'?",
+      "correct_answer": "Hans Zimmer",
+      "incorrect_answers": ["John Williams", "Howard Shore", "James Newton Howard"]
+    },
+    {
+      "categoryName": "General Knowledge",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "How many continents are there on Earth?",
+      "correct_answer": "7",
+      "incorrect_answers": ["5", "6", "8"]
+    },
+    {
+      "categoryName": "General Knowledge",
+      "type": "boolean",
+      "difficulty": "medium",
+      "question": "A leap year has 366 days.",
+      "correct_answer": "True",
+      "incorrect_answers": ["False"]
+    }
+  ]
+}

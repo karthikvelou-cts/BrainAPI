@@ -19,7 +19,10 @@ export const useTriviaStore = defineStore("trivia", {
       this.loading = true;
       this.error = "";
       try {
-        const query = new URLSearchParams(params).toString();
+        const sanitizedParams = Object.fromEntries(
+          Object.entries(params).filter(([, value]) => value !== "" && value !== null && value !== undefined)
+        );
+        const query = new URLSearchParams(sanitizedParams).toString();
         const { data } = await api.get(`/questions?${query}`);
         this.questions = data.results;
         this.pagination = data.pagination;
