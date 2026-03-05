@@ -4,6 +4,7 @@ import BrowseQuestionsView from "../views/BrowseQuestionsView.vue";
 import CategoriesView from "../views/CategoriesView.vue";
 import AuthView from "../views/AuthView.vue";
 import AdminDashboardView from "../views/AdminDashboardView.vue";
+import UserDashboardView from "../views/UserDashboardView.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -12,6 +13,12 @@ const router = createRouter({
     { path: "/browse", name: "browse", component: BrowseQuestionsView },
     { path: "/categories", name: "categories", component: CategoriesView },
     { path: "/auth", name: "auth", component: AuthView },
+    {
+      path: "/dashboard",
+      name: "dashboard",
+      component: UserDashboardView,
+      meta: { requiresAuth: true },
+    },
     {
       path: "/admin",
       name: "admin",
@@ -23,8 +30,11 @@ const router = createRouter({
 
 router.beforeEach((to) => {
   const user = JSON.parse(localStorage.getItem("brainapi_user") || "null");
+  if (to.meta.requiresAuth && !user) {
+    return { name: "auth", query: { redirect: to.fullPath } };
+  }
   if (to.meta.requiresAdmin && user?.role !== "admin") {
-    return { name: "auth" };
+    return { name: "auth", query: { redirect: to.fullPath } };
   }
   return true;
 });

@@ -70,19 +70,10 @@
         <RouterLink to="/categories" class="rounded-lg border border-slate-200 p-3 text-sm font-medium text-slate-700 transition hover:border-brand-500 hover:text-brand-700">
           Category Library
         </RouterLink>
-        <RouterLink v-if="auth.isAdmin" to="/admin" class="rounded-lg border border-slate-200 p-3 text-sm font-medium text-slate-700 transition hover:border-brand-500 hover:text-brand-700">
+        <RouterLink to="/admin" class="rounded-lg border border-slate-200 p-3 text-sm font-medium text-slate-700 transition hover:border-brand-500 hover:text-brand-700">
           Admin Dashboard
-        </RouterLink>
-        <RouterLink v-else to="/auth" class="rounded-lg border border-slate-200 p-3 text-sm font-medium text-slate-700 transition hover:border-brand-500 hover:text-brand-700">
-          Admin Login
         </RouterLink>
       </div>
     </div>
   </section>
 </template>
-
-<script setup>
-import { useAuthStore } from "../stores/auth";
-
-const auth = useAuthStore();
-</script>

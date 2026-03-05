@@ -11,6 +11,7 @@
       <div class="flex items-center gap-4 text-sm font-medium text-slate-700">
         <RouterLink to="/browse" class="hover:text-brand-600">Browse</RouterLink>
         <RouterLink to="/categories" class="hover:text-brand-600">Categories</RouterLink>
+        <RouterLink v-if="auth.isAuthenticated" to="/dashboard" class="hover:text-brand-600">Dashboard</RouterLink>
         <RouterLink v-if="auth.isAdmin" to="/admin" class="hover:text-brand-600">Admin</RouterLink>
         <RouterLink v-if="!auth.isAuthenticated" to="/auth" class="rounded bg-brand-600 px-3 py-1.5 text-white">Login</RouterLink>
         <button

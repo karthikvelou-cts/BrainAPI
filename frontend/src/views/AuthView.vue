@@ -64,11 +64,12 @@
 
 <script setup>
 import { reactive, ref } from "vue";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useAuthStore } from "../stores/auth";
 
 const auth = useAuthStore();
 const router = useRouter();
+const route = useRoute();
 
 const mode = ref("login");
 const localError = ref("");
@@ -100,9 +101,17 @@ const submit = async () => {
     }
 
     if (auth.isAdmin) {
-      router.push("/admin");
+      const redirectTarget =
+        typeof route.query.redirect === "string" && route.query.redirect.startsWith("/")
+          ? route.query.redirect
+          : "/admin";
+      router.push(redirectTarget);
     } else {
-      router.push("/");
+      const redirectTarget =
+        typeof route.query.redirect === "string" && route.query.redirect.startsWith("/")
+          ? route.query.redirect
+          : "/dashboard";
+      router.push(redirectTarget);
     }
   } catch {
     // API-level errors are already handled in auth store and surfaced via auth.error

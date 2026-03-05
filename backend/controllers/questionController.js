@@ -97,7 +97,9 @@ export const getQuestions = async (req, res) => {
       categoryId = foundCategory._id;
     }
 
-    filter.category = categoryId;
+    // Support both ObjectId and string-stored category values
+    // (some datasets may have been inserted directly in Mongo as strings).
+    filter.$or = [{ category: categoryId }, { category: String(categoryId) }];
   }
   if (difficulty) filter.difficulty = difficulty;
   if (type) filter.type = type;
@@ -151,6 +153,51 @@ export const createQuestion = async (req, res) => {
   return res.status(201).json(populated);
 };
 
+export const getMyQuestions = async (req, res) => {
+  const { page = 1, limit = 20 } = req.query;
+  const { skip, ...meta } = getPagination(page, limit, 50);
+
+  const [questions, total] = await Promise.all([
+    Question.find({ createdBy: req.user._id })
+      .populate("category", "name")
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(meta.limit),
+    Question.countDocuments({ createdBy: req.user._id }),
+  ]);
+
+  return res.status(200).json({
+    response_code: 0,
+    results: questions.map(transformQuestion),
+    pagination: {
+      ...meta,
+      total,
+      totalPages: Math.ceil(total / meta.limit),
+    },
+  });
+};
+
+export const createMyQuestion = async (req, res) => {
+  const categoryExists = await Category.exists({ _id: req.body.category });
+  if (!categoryExists) {
+    return res.status(400).json({ message: "Category does not exist" });
+  }
+
+  if (req.body.type === "boolean" && req.body.incorrect_answers.length !== 1) {
+    return res.status(400).json({
+      message: "Boolean questions must contain exactly one incorrect answer",
+    });
+  }
+
+  const question = await Question.create({
+    ...req.body,
+    createdBy: req.user._id,
+  });
+
+  const populated = await question.populate("category", "name");
+  return res.status(201).json(populated);
+};
+
 export const updateQuestion = async (req, res) => {
   const existing = await Question.findById(req.params.id);
   if (!existing) {
@@ -180,6 +227,42 @@ export const updateQuestion = async (req, res) => {
 
 export const deleteQuestion = async (req, res) => {
   const question = await Question.findById(req.params.id);
+  if (!question) {
+    return res.status(404).json({ message: "Question not found" });
+  }
+
+  await question.deleteOne();
+  return res.status(204).send();
+};
+
+export const updateMyQuestion = async (req, res) => {
+  const existing = await Question.findOne({ _id: req.params.id, createdBy: req.user._id });
+  if (!existing) {
+    return res.status(404).json({ message: "Question not found" });
+  }
+
+  if (req.body.category) {
+    const categoryExists = await Category.exists({ _id: req.body.category });
+    if (!categoryExists) {
+      return res.status(400).json({ message: "Category does not exist" });
+    }
+  }
+
+  const nextType = req.body.type || existing.type;
+  const nextIncorrectAnswers = req.body.incorrect_answers || existing.incorrect_answers;
+  if (nextType === "boolean" && nextIncorrectAnswers.length !== 1) {
+    return res.status(400).json({ message: "Boolean questions must include one incorrect answer" });
+  }
+
+  Object.assign(existing, req.body);
+  await existing.save();
+  await existing.populate("category", "name");
+
+  return res.status(200).json(existing);
+};
+
+export const deleteMyQuestion = async (req, res) => {
+  const question = await Question.findOne({ _id: req.params.id, createdBy: req.user._id });
   if (!question) {
     return res.status(404).json({ message: "Question not found" });
   }
