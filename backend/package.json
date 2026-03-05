@@ -1,7 +1,7 @@
 {
   "name": "brainapi-backend",
   "version": "1.0.0",
-  "description": "OpenTDB-like trivia backend",
+  "description": "brainyquizy trivia backend",
   "main": "server.js",
   "type": "module",
   "scripts": {

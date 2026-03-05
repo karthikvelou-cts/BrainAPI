@@ -3,9 +3,9 @@ import swaggerJSDoc from "swagger-jsdoc";
 const swaggerDefinition = {
   openapi: "3.0.0",
   info: {
-    title: "BrainAPI Trivia Service",
+    title: "brainyquizy Trivia Service",
     version: "1.0.0",
-    description: "OpenTDB-like trivia API with JWT and MongoDB",
+    description: "Trivia API with JWT and MongoDB",
   },
   servers: [{ url: "http://localhost:5000" }],
   components: {

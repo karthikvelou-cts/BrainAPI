@@ -1,7 +1,7 @@
 import crypto from "crypto";
 import { param } from "express-validator";
 import Token from "../models/Token.js";
-import { opentdbResponse } from "../utils/helpers.js";
+import { apiResponse } from "../utils/helpers.js";
 
 const tokenTtlHours = Number(process.env.TOKEN_TTL_HOURS || 6);
 
@@ -33,8 +33,8 @@ export const deleteSessionToken = async (req, res) => {
   });
 
   if (!deleted) {
-    return res.status(404).json(opentdbResponse([], 3, { message: "Token not found" }));
+    return res.status(404).json(apiResponse([], 3, { message: "Token not found" }));
   }
 
-  return res.status(200).json(opentdbResponse([], 0, { message: "Token deleted" }));
+  return res.status(200).json(apiResponse([], 0, { message: "Token deleted" }));
 };

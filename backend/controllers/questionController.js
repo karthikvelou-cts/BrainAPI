@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import Question from "../models/Question.js";
 import Category from "../models/Category.js";
 import Token from "../models/Token.js";
-import { getPagination, opentdbResponse, parseAmount } from "../utils/helpers.js";
+import { apiResponse, getPagination, parseAmount } from "../utils/helpers.js";
 
 const transformQuestion = (questionDoc) => ({
   _id: questionDoc._id,
@@ -38,7 +38,11 @@ export const questionIdValidator = [param("id").isMongoId().withMessage("Invalid
 
 export const getQuestionsValidators = [
   query("amount").optional({ values: "falsy" }).isInt({ min: 1, max: 50 }).withMessage("amount must be between 1 and 50"),
-  query("category").optional({ values: "falsy" }).custom((value) => mongoose.Types.ObjectId.isValid(value) || value === "any").withMessage("Invalid category"),
+  query("category").optional({ values: "falsy" }).custom((value) => {
+    if (value === "any") return true;
+    if (mongoose.Types.ObjectId.isValid(value)) return true;
+    return typeof value === "string" && value.trim().length > 0;
+  }).withMessage("Invalid category"),
   query("difficulty").optional({ values: "falsy" }).isIn(["easy", "medium", "hard"]).withMessage("Invalid difficulty"),
   query("type").optional({ values: "falsy" }).isIn(["multiple", "boolean"]).withMessage("Invalid type"),
   query("page").optional({ values: "falsy" }).isInt({ min: 1 }).withMessage("page must be >= 1"),
@@ -68,17 +72,32 @@ export const getQuestions = async (req, res) => {
 
   const isTokenValid = await validateOpenToken(token);
   if (!isTokenValid) {
-    return res.status(401).json(opentdbResponse([], 3, { message: "Invalid or expired session token" }));
+    return res.status(401).json(apiResponse([], 3, { message: "Invalid or expired session token" }));
   }
 
   const filter = {};
 
   if (category && category !== "any") {
-    const exists = await Category.exists({ _id: category });
-    if (!exists) {
-      return res.status(400).json(opentdbResponse([], 1, { message: "Invalid category" }));
+    let categoryId = null;
+
+    if (mongoose.Types.ObjectId.isValid(category)) {
+      const exists = await Category.exists({ _id: category });
+      if (!exists) {
+        return res.status(400).json(apiResponse([], 1, { message: "Invalid category" }));
+      }
+      categoryId = category;
+    } else {
+      const foundCategory = await Category.findOne({
+        name: { $regex: `^${category.trim()}$`, $options: "i" },
+      }).select("_id");
+
+      if (!foundCategory) {
+        return res.status(400).json(apiResponse([], 1, { message: "Invalid category" }));
+      }
+      categoryId = foundCategory._id;
     }
-    filter.category = category;
+
+    filter.category = categoryId;
   }
   if (difficulty) filter.difficulty = difficulty;
   if (type) filter.type = type;
@@ -99,7 +118,7 @@ export const getQuestions = async (req, res) => {
   const responseCode = results.length > 0 ? 0 : 1;
 
   return res.status(200).json(
-    opentdbResponse(results, responseCode, {
+    apiResponse(results, responseCode, {
       pagination: {
         ...meta,
         total,

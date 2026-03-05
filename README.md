@@ -1,6 +1,6 @@
-# BrainAPI Trivia Platform
+# brainyquizy Trivia Platform
 
-Full-stack OpenTDB-style trivia database app with JWT auth, admin CRUD, token sessions, filtering, and pagination.
+Full-stack trivia database app with JWT auth, admin CRUD, token sessions, filtering, and pagination.
 
 ## Tech Stack
 
@@ -87,7 +87,7 @@ Use `frontend/.env.example` as template:
 - `GET /api/token` (JWT required)
 - `DELETE /api/token/:token` (JWT required)
 
-### OpenTDB Response Format
+### API Response Format
 
 Question fetch returns:
 

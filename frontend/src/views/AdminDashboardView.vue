@@ -25,8 +25,11 @@
       </div>
     </article>
 
-    <article class="rounded-xl border border-slate-200 bg-white p-4">
+    <article ref="createQuestionSection" class="rounded-xl border border-slate-200 bg-white p-4">
       <h2 class="mb-3 text-lg font-semibold">Create Question</h2>
+      <p v-if="!hasCategories" class="mb-3 rounded bg-amber-50 p-2 text-sm text-amber-700">
+        Create at least one category before adding questions.
+      </p>
       <form class="grid gap-2 md:grid-cols-2" @submit.prevent="createQuestion">
         <select v-model="questionForm.category" class="rounded border px-3 py-2" required>
           <option disabled value="">Select category</option>
@@ -44,7 +47,7 @@
         <input v-model="questionForm.question" class="rounded border px-3 py-2 md:col-span-2" placeholder="Question" required />
         <input v-model="questionForm.correct_answer" class="rounded border px-3 py-2" placeholder="Correct answer" required />
         <input v-model="questionForm.incorrect_answers_text" class="rounded border px-3 py-2" placeholder="Incorrect answers (comma separated)" required />
-        <button class="rounded bg-brand-600 px-4 py-2 text-white md:col-span-2">Add Question</button>
+        <button :disabled="!hasCategories" class="rounded bg-brand-600 px-4 py-2 text-white disabled:cursor-not-allowed disabled:bg-slate-400 md:col-span-2">Add Question</button>
       </form>
     </article>
 
@@ -79,6 +82,12 @@
           </div>
         </div>
       </div>
+      <div v-else class="rounded border border-dashed border-slate-300 p-4 text-center">
+        <p class="text-sm text-slate-600">No questions available yet.</p>
+        <button class="mt-3 rounded bg-brand-600 px-3 py-1.5 text-sm text-white" @click="scrollToCreateQuestion">
+          Create First Question
+        </button>
+      </div>
     </article>
 
     <p v-if="message" class="text-sm text-emerald-700">{{ message }}</p>
@@ -87,7 +96,7 @@
 </template>
 
 <script setup>
-import { onMounted, reactive, ref } from "vue";
+import { computed, onMounted, reactive, ref } from "vue";
 import api from "../services/api";
 import { useTriviaStore } from "../stores/trivia";
 
@@ -95,6 +104,7 @@ const store = useTriviaStore();
 const message = ref("");
 const error = ref("");
 const questions = ref([]);
+const createQuestionSection = ref(null);
 
 const categoryForm = reactive({
   name: "",
@@ -110,9 +120,15 @@ const questionForm = reactive({
   incorrect_answers_text: "",
 });
 
+const hasCategories = computed(() => store.categories.length > 0);
+
 const loadQuestions = async () => {
-  const { data } = await api.get("/questions?amount=20&page=1&limit=20");
-  questions.value = data.results.map((q) => ({ ...q }));
+  try {
+    const { data } = await api.get("/questions?amount=20&page=1&limit=20");
+    questions.value = data.results.map((q) => ({ ...q }));
+  } catch {
+    questions.value = [];
+  }
 };
 
 const createCategory = async () => {
@@ -163,6 +179,11 @@ const setIncorrect = (question, text) => {
 };
 
 const createQuestion = async () => {
+  if (!hasCategories.value) {
+    error.value = "Please create a category first.";
+    return;
+  }
+
   message.value = "";
   error.value = "";
   try {
@@ -191,6 +212,10 @@ const createQuestion = async () => {
   } catch (e) {
     error.value = e.response?.data?.message || "Failed to create question";
   }
+};
+
+const scrollToCreateQuestion = () => {
+  createQuestionSection.value?.scrollIntoView({ behavior: "smooth", block: "start" });
 };
 
 const updateQuestion = async (question) => {

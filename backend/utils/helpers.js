@@ -12,7 +12,7 @@ export const parseAmount = (amount = 10, maxAmount = 50) => {
   return Math.min(parsed, maxAmount);
 };
 
-export const opentdbResponse = (results = [], response_code = 0, extra = {}) => ({
+export const apiResponse = (results = [], response_code = 0, extra = {}) => ({
   response_code,
   results,
   ...extra,

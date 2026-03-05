@@ -6,17 +6,23 @@ export const useTriviaStore = defineStore("trivia", {
     questions: [],
     categories: [],
     pagination: null,
-    loading: false,
+    loadingQuestions: false,
+    loadingCategories: false,
     error: "",
   }),
   actions: {
     async fetchCategories(page = 1, limit = 50) {
-      const { data } = await api.get(`/categories?page=${page}&limit=${limit}`);
-      this.categories = data.data;
-      return data;
+      this.loadingCategories = true;
+      try {
+        const { data } = await api.get(`/categories?page=${page}&limit=${limit}`);
+        this.categories = data.data;
+        return data;
+      } finally {
+        this.loadingCategories = false;
+      }
     },
     async fetchQuestions(params = {}) {
-      this.loading = true;
+      this.loadingQuestions = true;
       this.error = "";
       try {
         const sanitizedParams = Object.fromEntries(
@@ -31,7 +37,7 @@ export const useTriviaStore = defineStore("trivia", {
         this.error = error.response?.data?.message || "Failed to fetch questions";
         throw error;
       } finally {
-        this.loading = false;
+        this.loadingQuestions = false;
       }
     },
   },

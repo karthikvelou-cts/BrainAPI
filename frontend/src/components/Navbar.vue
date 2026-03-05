@@ -1,7 +1,13 @@
 <template>
   <header class="border-b border-slate-200 bg-white">
     <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-      <RouterLink class="text-lg font-bold text-brand-700" to="/">BrainAPI</RouterLink>
+      <RouterLink class="flex items-center gap-3" to="/">
+        <img
+          :src="logo"
+          alt="brainyquizy logo"
+          class="h-10 w-auto max-w-[180px] shrink-0 rounded-md object-contain"
+        />
+      </RouterLink>
       <div class="flex items-center gap-4 text-sm font-medium text-slate-700">
         <RouterLink to="/browse" class="hover:text-brand-600">Browse</RouterLink>
         <RouterLink to="/categories" class="hover:text-brand-600">Categories</RouterLink>
@@ -22,6 +28,7 @@
 <script setup>
 import { useRouter } from "vue-router";
 import { useAuthStore } from "../stores/auth";
+import logo from "../assets/images/logo.png";
 
 const auth = useAuthStore();
 const router = useRouter();

@@ -20,14 +20,18 @@ const limiter = rateLimit({
   legacyHeaders: false,
 });
 
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 app.use(cors({ origin: process.env.CORS_ORIGIN?.split(",") || "*" }));
 app.use(express.json({ limit: "1mb" }));
 app.use(morgan("dev"));
 app.use(limiter);
 
 app.get("/", (req, res) => {
-  res.status(200).json({ message: "BrainAPI Trivia Backend Running" });
+  res.status(200).json({ message: "brainyquizy Trivia Backend Running" });
 });
 
 app.use("/api/auth", authRoutes);
