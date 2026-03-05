@@ -97,10 +97,11 @@ export const getQuestions = async (req, res) => {
       categoryId = foundCategory._id;
     }
 
-    // Support both ObjectId and string-stored category values
-    // (some datasets may have been inserted directly in Mongo as strings).
-    const normalizedCategoryId = new mongoose.Types.ObjectId(String(categoryId));
-    filter.$or = [{ category: normalizedCategoryId }, { category: String(normalizedCategoryId) }];
+    // Robust category match for mixed legacy data:
+    // works when `category` is stored either as ObjectId or as string.
+    filter.$expr = {
+      $eq: [{ $toString: "$category" }, String(categoryId)],
+    };
   }
   if (difficulty) filter.difficulty = difficulty;
   if (type) filter.type = type;
