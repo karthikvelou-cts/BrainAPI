@@ -1,88 +1,451 @@
-/api/auth/register:
-  post:
-    summary: Register user
-    tags: [Auth]
-/api/auth/login:
-  post:
-    summary: Login user
-    tags: [Auth]
-/api/categories:
-  get:
-    summary: Get categories
-    tags: [Categories]
-  post:
-    summary: Create category (admin)
-    tags: [Categories]
-    security:
-      - bearerAuth: []
-/api/categories/{id}:
-  put:
-    summary: Update category (admin)
-    tags: [Categories]
-    security:
-      - bearerAuth: []
-  delete:
-    summary: Delete category (admin)
-    tags: [Categories]
-    security:
-      - bearerAuth: []
-/api/questions:
-  get:
-    summary: Get questions
-    tags: [Questions]
-  post:
-    summary: Create question (admin)
-    tags: [Questions]
-    security:
-      - bearerAuth: []
-/api/questions/{id}:
-  put:
-    summary: Update question (admin)
-    tags: [Questions]
-    security:
-      - bearerAuth: []
-  delete:
-    summary: Delete question (admin)
-    tags: [Questions]
-    security:
-      - bearerAuth: []
-/api/questions/import:
-  post:
-    summary: Import questions JSON (admin)
-    tags: [Questions]
-    security:
-      - bearerAuth: []
-/api/questions/my:
-  get:
-    summary: Get authenticated user's own questions
-    tags: [User Questions]
-    security:
-      - bearerAuth: []
-  post:
-    summary: Create a question as authenticated user
-    tags: [User Questions]
-    security:
-      - bearerAuth: []
-/api/questions/my/{id}:
-  put:
-    summary: Update authenticated user's own question
-    tags: [User Questions]
-    security:
-      - bearerAuth: []
-  delete:
-    summary: Delete authenticated user's own question
-    tags: [User Questions]
-    security:
-      - bearerAuth: []
-/api/token:
-  get:
-    summary: Create session token
-    tags: [Token]
-    security:
-      - bearerAuth: []
-/api/token/{token}:
-  delete:
-    summary: Delete session token
-    tags: [Token]
-    security:
-      - bearerAuth: []
+paths:
+  /api/auth/register:
+    post:
+      summary: Register user
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [username, email, password]
+              properties:
+                username:
+                  type: string
+                  example: karthik
+                email:
+                  type: string
+                  format: email
+                  example: user@example.com
+                password:
+                  type: string
+                  minLength: 6
+                  example: Pass@123
+      responses:
+        "201":
+          description: User registered
+        "400":
+          description: Validation error
+
+  /api/auth/login:
+    post:
+      summary: Login user
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: user@example.com
+                password:
+                  type: string
+                  example: Pass@123
+      responses:
+        "200":
+          description: Login successful
+        "401":
+          description: Invalid credentials
+
+  /api/categories:
+    get:
+      summary: Get categories
+      tags: [Categories]
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+      responses:
+        "200":
+          description: Category list
+    post:
+      summary: Create category (admin)
+      tags: [Categories]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name:
+                  type: string
+                  example: Science
+                description:
+                  type: string
+                  example: Science and nature questions
+      responses:
+        "201":
+          description: Category created
+        "401":
+          description: Unauthorized
+
+  /api/categories/{id}:
+    put:
+      summary: Update category (admin)
+      tags: [Categories]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Category MongoDB ObjectId
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+      responses:
+        "200":
+          description: Category updated
+        "404":
+          description: Category not found
+    delete:
+      summary: Delete category (admin)
+      tags: [Categories]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Category MongoDB ObjectId
+      responses:
+        "204":
+          description: Category deleted
+        "404":
+          description: Category not found
+
+  /api/questions:
+    get:
+      summary: Get questions
+      tags: [Questions]
+      parameters:
+        - in: query
+          name: amount
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 10
+          description: Number of questions requested
+        - in: query
+          name: category
+          schema:
+            type: string
+          description: Category ObjectId or category name
+        - in: query
+          name: difficulty
+          schema:
+            type: string
+            enum: [easy, medium, hard]
+        - in: query
+          name: type
+          schema:
+            type: string
+            enum: [multiple, boolean]
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 10
+        - in: query
+          name: token
+          schema:
+            type: string
+          description: Optional session token from /api/token
+      responses:
+        "200":
+          description: Questions response with pagination
+        "401":
+          description: Invalid or expired session token
+    post:
+      summary: Create question (admin)
+      tags: [Questions]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuestionWrite"
+      responses:
+        "201":
+          description: Question created
+        "400":
+          description: Validation or category error
+
+  /api/questions/{id}:
+    put:
+      summary: Update question (admin)
+      tags: [Questions]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Question MongoDB ObjectId
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuestionWrite"
+      responses:
+        "200":
+          description: Question updated
+        "404":
+          description: Question not found
+    delete:
+      summary: Delete question (admin)
+      tags: [Questions]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Question MongoDB ObjectId
+      responses:
+        "204":
+          description: Question deleted
+        "404":
+          description: Question not found
+
+  /api/questions/import:
+    post:
+      summary: Import questions JSON (admin)
+      tags: [Questions]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [questions]
+              properties:
+                questions:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/QuestionImportItem"
+      responses:
+        "201":
+          description: Questions imported
+        "400":
+          description: Invalid payload
+
+  /api/questions/my:
+    get:
+      summary: Get authenticated user's own questions
+      tags: [User Questions]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 20
+      responses:
+        "200":
+          description: User question list
+    post:
+      summary: Create a question as authenticated user
+      tags: [User Questions]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuestionWrite"
+      responses:
+        "201":
+          description: User question created
+        "400":
+          description: Validation error
+
+  /api/questions/my/{id}:
+    put:
+      summary: Update authenticated user's own question
+      tags: [User Questions]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Question MongoDB ObjectId
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QuestionWrite"
+      responses:
+        "200":
+          description: User question updated
+        "404":
+          description: Question not found
+    delete:
+      summary: Delete authenticated user's own question
+      tags: [User Questions]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Question MongoDB ObjectId
+      responses:
+        "204":
+          description: User question deleted
+        "404":
+          description: Question not found
+
+  /api/token:
+    get:
+      summary: Create session token
+      tags: [Token]
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Token generated
+        "401":
+          description: Unauthorized
+
+  /api/token/{token}:
+    delete:
+      summary: Delete session token
+      tags: [Token]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: token
+          required: true
+          schema:
+            type: string
+          description: Session token string
+      responses:
+        "204":
+          description: Token deleted
+        "404":
+          description: Token not found
+
+components:
+  schemas:
+    QuestionWrite:
+      type: object
+      required: [category, type, difficulty, question, correct_answer, incorrect_answers]
+      properties:
+        category:
+          type: string
+          description: Category MongoDB ObjectId
+          example: 66cb2f8f5c4879f427f25f40
+        type:
+          type: string
+          enum: [multiple, boolean]
+          example: multiple
+        difficulty:
+          type: string
+          enum: [easy, medium, hard]
+          example: easy
+        question:
+          type: string
+          example: What is the capital of France?
+        correct_answer:
+          type: string
+          example: Paris
+        incorrect_answers:
+          type: array
+          minItems: 1
+          items:
+            type: string
+          example: ["London", "Berlin", "Rome"]
+
+    QuestionImportItem:
+      type: object
+      required: [type, difficulty, question, correct_answer, incorrect_answers]
+      properties:
+        category:
+          type: string
+          description: Category ObjectId (optional when categoryName provided)
+        categoryName:
+          type: string
+          description: Category name used to auto-create category if category id is missing
+          example: General Knowledge
+        type:
+          type: string
+          enum: [multiple, boolean]
+        difficulty:
+          type: string
+          enum: [easy, medium, hard]
+        question:
+          type: string
+        correct_answer:
+          type: string
+        incorrect_answers:
+          type: array
+          items:
+            type: string
