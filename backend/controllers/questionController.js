@@ -99,7 +99,8 @@ export const getQuestions = async (req, res) => {
 
     // Support both ObjectId and string-stored category values
     // (some datasets may have been inserted directly in Mongo as strings).
-    filter.$or = [{ category: categoryId }, { category: String(categoryId) }];
+    const normalizedCategoryId = new mongoose.Types.ObjectId(String(categoryId));
+    filter.$or = [{ category: normalizedCategoryId }, { category: String(normalizedCategoryId) }];
   }
   if (difficulty) filter.difficulty = difficulty;
   if (type) filter.type = type;
