@@ -1,36 +1,126 @@
-# brainyquizy Trivia Platform
+# BrainyQuizy Platform
 
-Full-stack trivia database app with JWT auth, admin CRUD, token sessions, filtering, and pagination.
+Full-stack MEVN platform with:
+- Public question APIs (filter, pagination)
+- User-owned question dashboard (create/update/delete only own questions)
+- Admin dashboard for category and global question management
+- JWT auth, token sessions, safety validation, Swagger docs, Docker, and Vercel-ready deployment
 
 ## Tech Stack
 
-- Backend: Node.js, Express.js, MongoDB + Mongoose, JWT, bcrypt, Helmet, CORS, rate limiting
+- Backend: Node.js, Express.js, MongoDB + Mongoose, JWT, bcrypt, Helmet, CORS, rate limiting, express-validator
 - Frontend: Vue 3 (Composition API), Vue Router, Pinia, Axios, Tailwind CSS, Vite
-- Docs/Infra: Swagger UI, Docker, docker-compose
+- Docs/Infra: Swagger UI, Postman collection, Docker, Vercel
 
 ## Project Structure
 
 - `backend/`
-  - `models/` `controllers/` `routes/` `middleware/` `config/` `utils/`
-  - `server.js`
+  - `models/`, `controllers/`, `routes/`, `middleware/`, `config/`, `utils/`, `docs/`, `scripts/`
+  - `app.js`, `server.js`, `api/index.js`
 - `frontend/`
-  - `src/components/` `src/views/` `src/router/` `src/stores/` `src/services/`
+  - `src/components/`, `src/views/`, `src/router/`, `src/stores/`, `src/services/`
+- `postman/`
+  - `BrainAPI.postman_collection.json`
+
+## Application Flow
+
+### Public User Flow
+
+1. Open homepage and browse questions.
+2. Call `GET /api/questions` with optional filters:
+   - `amount`, `category`, `difficulty`, `type`, `page`, `limit`, `token`
+3. Browse categories via `GET /api/categories`.
+
+### Auth Flow
+
+1. Register via `POST /api/auth/register`.
+2. Login via `POST /api/auth/login`.
+3. JWT token is stored in frontend localStorage.
+
+### User Dashboard Flow (non-admin)
+
+1. Login as normal user.
+2. Go to `/dashboard`.
+3. Create own question via `POST /api/questions/my`.
+4. List own questions via `GET /api/questions/my`.
+5. Update/Delete only own questions:
+   - `PUT /api/questions/my/:id`
+   - `DELETE /api/questions/my/:id`
+
+### Admin Flow
+
+1. Login as admin.
+2. Access `/admin`.
+3. Manage categories (admin-only):
+   - `POST /api/categories`
+   - `PUT /api/categories/:id`
+   - `DELETE /api/categories/:id`
+4. Manage all questions (admin-only):
+   - `POST /api/questions`
+   - `PUT /api/questions/:id`
+   - `DELETE /api/questions/:id`
+   - `POST /api/questions/import`
+
+### Token Session Flow
+
+1. Generate token via `GET /api/token` (JWT required).
+2. Use it in `GET /api/questions?token=<sessionToken>`.
+3. Invalidate via `DELETE /api/token/:token`.
+
+## Access Control Matrix
+
+- Public (no JWT):
+  - `GET /api/questions`, `GET /api/categories`
+- Authenticated user:
+  - `/api/questions/my*`, `/api/token*`
+- Admin only:
+  - `/api/categories` write ops
+  - `/api/questions` global write ops and import
+
+## Content Safety Validation
+
+Question create/update/import requests are blocked (400) when content matches offensive/violence/adult/self-harm patterns.
+
+## API Response Format
+
+`GET /api/questions` and `GET /api/questions/my` return:
+
+```json
+{
+  "response_code": 0,
+  "results": [],
+  "pagination": {
+    "page": 1,
+    "limit": 10,
+    "total": 100,
+    "totalPages": 10
+  }
+}
+```
 
 ## Backend Setup
 
 1. `cd backend`
 2. `npm install`
 3. `copy .env.example .env` (Windows) or `cp .env.example .env`
-4. Update `.env` values
-5. `npm run seed`
+4. Update `.env`
+5. `npm run seed` (optional)
 6. `npm run dev`
 
-Backend runs at `http://localhost:5000`.
-Swagger docs at `http://localhost:5000/api/docs`.
+Backend URL: `http://localhost:5000`
 
-### Backend Environment Variables
+## Frontend Setup
 
-Use `backend/.env.example` as template:
+1. `cd frontend`
+2. `npm install`
+3. `copy .env.example .env` (Windows) or `cp .env.example .env`
+4. `npm run dev`
+
+Frontend URL: `http://localhost:5173`
+
+## Environment Variables
+
+### Backend (`backend/.env`)
 
 - `NODE_ENV`
 - `PORT`
@@ -45,93 +135,53 @@ Use `backend/.env.example` as template:
 - `ADMIN_EMAIL`
 - `ADMIN_PASSWORD`
 
-## Frontend Setup
+### Frontend (`frontend/.env`)
 
-1. `cd frontend`
-2. `npm install`
-3. `copy .env.example .env` (Windows) or `cp .env.example .env`
-4. `npm run dev`
+- `VITE_API_URL` (optional; defaults to `/api` in single Vercel deployment)
 
-Frontend runs at `http://localhost:5173`.
+## Swagger Docs
 
-### Frontend Environment Variables
+- UI: `http://localhost:5000/api/docs`
+- JSON: `http://localhost:5000/api/docs.json`
 
-Use `frontend/.env.example` as template:
+Production:
+- UI: `https://brainyquizy.vercel.app/api/docs`
+- JSON: `https://brainyquizy.vercel.app/api/docs.json`
 
-- `VITE_API_URL` (default: `http://localhost:5000/api`)
+## Postman Collection
 
-## API Overview
+Import:
+- `postman/BrainAPI.postman_collection.json`
 
-### Auth
+Collection includes:
+- Auth
+- Categories (public/admin)
+- Questions (public)
+- Questions (user-own)
+- Questions (admin)
+- Token
+- Swagger docs endpoints
 
-- `POST /api/auth/register`
-- `POST /api/auth/login`
+## Sample Data and Import
 
-### Categories
+- Seed script: `backend/scripts/seed.js`
+- Sample import files:
+  - `backend/scripts/sample-import.json`
+  - `backend/scripts/quiz-sample-data.json`
+  - `backend/scripts/quiz-100-questions.json`
 
-- `GET /api/categories`
-- `POST /api/categories` (admin)
-- `PUT /api/categories/:id` (admin)
-- `DELETE /api/categories/:id` (admin)
-
-### Questions
-
-- `GET /api/questions?amount=&category=&difficulty=&type=&page=&limit=&token=`
-- `POST /api/questions` (admin)
-- `PUT /api/questions/:id` (admin)
-- `DELETE /api/questions/:id` (admin)
-- `POST /api/questions/import` (admin)
-
-### Token Sessions
-
-- `GET /api/token` (JWT required)
-- `DELETE /api/token/:token` (JWT required)
-
-### API Response Format
-
-Question fetch returns:
-
-```json
-{
-  "response_code": 0,
-  "results": []
-}
-```
-
-## Seed Data
-
-`npm run seed` creates:
-
-- One admin user (from env vars)
-- Categories: General Knowledge, Science, History
-- Sample questions
-
-## Sample Question Import (Bonus)
-
-Use `backend/scripts/sample-import.json` with admin token:
+Admin import example:
 
 ```bash
 curl -X POST http://localhost:5000/api/questions/import \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer <JWT_TOKEN>" \
-  -d @backend/scripts/sample-import.json
+  -H "Authorization: Bearer <ADMIN_JWT_TOKEN>" \
+  --data-binary "@backend/scripts/quiz-100-questions.json"
 ```
 
-## Security Controls
+## Docker
 
-- Password hashing: `bcryptjs`
-- JWT auth middleware
-- Role-based access control (`adminOnly`)
-- Rate limiting (`express-rate-limit`)
-- Secure headers (`helmet`)
-- CORS policy (`cors`)
-
-## Docker Setup (Bonus)
-
-1. Create env files:
-   - `backend/.env`
-   - `frontend/.env`
-2. Run:
+Run full local stack:
 
 ```bash
 docker compose up --build
@@ -142,40 +192,41 @@ Services:
 - Backend: `http://localhost:5000`
 - MongoDB: `mongodb://localhost:27017`
 
-## Deployment Guide (Single Vercel Project)
+## Deployment (Single Vercel Project)
 
-Deploy from repository root so one Vercel deployment serves both:
-- Vue frontend (static build)
-- Express API (`/api/*`) as serverless function
+Deploy one Vercel project from repo root.
 
-### Vercel Setup
+Vercel reads root `vercel.json` to:
+- Build frontend from `frontend/package.json`
+- Run backend serverless function from `backend/api/index.js`
+- Route `/api/*` to backend
+- Route non-API paths to frontend app
 
-1. Create one Vercel project with **Root Directory** = repository root.
-2. Vercel will use root `vercel.json` to:
-   - Build frontend from `frontend/package.json`
-   - Run backend function from `backend/api/index.js`
-   - Route `/api/*` to backend
-   - Route all other paths to Vue `index.html`
-3. Add environment variables in Vercel:
-   - `NODE_ENV=production`
-   - `MONGO_URI=<your atlas uri>`
-   - `JWT_SECRET=<strong secret>`
-   - `JWT_EXPIRES_IN=1d`
-   - `TOKEN_TTL_HOURS=6`
-   - `CORS_ORIGIN=https://<your-project>.vercel.app`
-   - `RATE_LIMIT_WINDOW_MS=900000`
-   - `RATE_LIMIT_MAX=200`
-4. Optional frontend env var:
-   - `VITE_API_URL` (can be omitted; defaults to `/api`)
+Recommended Vercel env vars:
+- `NODE_ENV=production`
+- `MONGO_URI=<atlas-uri>`
+- `JWT_SECRET=<strong-secret>`
+- `JWT_EXPIRES_IN=1d`
+- `TOKEN_TTL_HOURS=6`
+- `CORS_ORIGIN=https://<your-project>.vercel.app,http://localhost:5173`
+- `RATE_LIMIT_WINDOW_MS=900000`
+- `RATE_LIMIT_MAX=200`
 
-### Post-Deploy Checks
+## Troubleshooting
 
-1. Open `https://<your-project>.vercel.app/` and confirm frontend loads.
-2. Open `https://<your-project>.vercel.app/api/docs` and verify Swagger loads.
-3. Test register/login and question browsing from the deployed frontend.
+### `/api/docs` blank on Vercel
 
-## Notes
+- Ensure latest backend is deployed.
+- Verify `/api/docs.json` returns JSON.
+- Hard refresh browser cache.
 
-- Admin dashboard supports create/update/delete for categories and questions.
-- Browse supports category/difficulty/type filters and pagination.
-- JWT and user session are stored in browser `localStorage`.
+### Category filter returns empty
+
+- Confirm data exists for selected filter combination.
+- Try category-only first, then add `difficulty`/`type`.
+
+### Admin/User dashboard routing
+
+- `/admin` requires admin role.
+- `/dashboard` is for authenticated users.
+- Clear localStorage (`brainapi_token`, `brainapi_user`) and relogin if role looks stale.

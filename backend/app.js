@@ -31,14 +31,23 @@ app.use(morgan("dev"));
 app.use(limiter);
 
 app.get("/", (req, res) => {
-  res.status(200).json({ message: "brainyquizy Trivia Backend Running" });
+  res.status(200).json({ message: "BrainyQuizy Backend Running" });
 });
 
 app.use("/api/auth", authRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/questions", questionRoutes);
 app.use("/api/token", tokenRoutes);
-app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.get("/api/docs.json", (req, res) => {
+  res.status(200).json(swaggerSpec);
+});
+app.use(
+  "/api/docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerSpec, {
+    swaggerOptions: { url: "/api/docs.json" },
+  })
+);
 
 app.use(notFound);
 app.use(errorHandler);

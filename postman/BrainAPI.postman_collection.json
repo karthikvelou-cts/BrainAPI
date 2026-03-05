@@ -1,18 +1,23 @@
 {
   "info": {
-    "_postman_id": "4f7150df-0ecf-426d-b9f0-7d72bf85a46f",
-    "name": "BrainAPI Trivia",
+    "_postman_id": "de13f857-8a79-4c6f-a432-b741d6d53a6c",
+    "name": "brainyquizy API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": "Postman collection for BrainAPI OpenTDB-style trivia backend"
+    "description": "Complete Postman collection for brainyquizy (public, user, admin, token, docs)."
   },
   "variable": [
     { "key": "baseUrl", "value": "http://localhost:5000/api" },
-    { "key": "email", "value": "admin@example.com" },
-    { "key": "password", "value": "Admin@123" },
-    { "key": "username", "value": "admin" },
-    { "key": "jwtToken", "value": "" },
+    { "key": "adminEmail", "value": "admin@example.com" },
+    { "key": "adminPassword", "value": "Admin@123" },
+    { "key": "adminUsername", "value": "admin" },
+    { "key": "userEmail", "value": "user1@example.com" },
+    { "key": "userPassword", "value": "User@12345" },
+    { "key": "userUsername", "value": "user1" },
+    { "key": "adminToken", "value": "" },
+    { "key": "userToken", "value": "" },
     { "key": "categoryId", "value": "" },
-    { "key": "questionId", "value": "" },
+    { "key": "adminQuestionId", "value": "" },
+    { "key": "userQuestionId", "value": "" },
     { "key": "sessionToken", "value": "" }
   ],
   "item": [
@@ -20,41 +25,57 @@
       "name": "Auth",
       "item": [
         {
-          "name": "Register",
+          "name": "Register User",
           "request": {
             "method": "POST",
-            "header": [
-              { "key": "Content-Type", "value": "application/json" }
-            ],
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"username\": \"{{username}}\",\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+              "raw": "{\n  \"username\": \"{{userUsername}}\",\n  \"email\": \"{{userEmail}}\",\n  \"password\": \"{{userPassword}}\"\n}"
             },
             "url": "{{baseUrl}}/auth/register"
           }
         },
         {
-          "name": "Login",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "const json = pm.response.json();",
-                  "if (json.token) { pm.collectionVariables.set('jwtToken', json.token); }"
-                ],
-                "type": "text/javascript"
-              }
+          "name": "Login Admin",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "const json = pm.response.json();",
+                "if (json.token) pm.collectionVariables.set('adminToken', json.token);"
+              ]
             }
-          ],
+          }],
           "request": {
             "method": "POST",
-            "header": [
-              { "key": "Content-Type", "value": "application/json" }
-            ],
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+              "raw": "{\n  \"email\": \"{{adminEmail}}\",\n  \"password\": \"{{adminPassword}}\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/login"
+          }
+        },
+        {
+          "name": "Login User",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "const json = pm.response.json();",
+                "if (json.token) pm.collectionVariables.set('userToken', json.token);"
+              ]
+            }
+          }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{userEmail}}\",\n  \"password\": \"{{userPassword}}\"\n}"
             },
             "url": "{{baseUrl}}/auth/login"
           }
@@ -62,38 +83,36 @@
       ]
     },
     {
-      "name": "Categories",
+      "name": "Categories (Public/Admin)",
       "item": [
         {
-          "name": "Get Categories",
+          "name": "Get Categories (Public)",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/categories?page=1&limit=10"
+            "url": "{{baseUrl}}/categories?page=1&limit=25"
           }
         },
         {
           "name": "Create Category (Admin)",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "const json = pm.response.json();",
-                  "if (json._id) { pm.collectionVariables.set('categoryId', json._id); }"
-                ],
-                "type": "text/javascript"
-              }
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "const json = pm.response.json();",
+                "if (json._id) pm.collectionVariables.set('categoryId', json._id);"
+              ]
             }
-          ],
+          }],
           "request": {
             "method": "POST",
             "header": [
               { "key": "Content-Type", "value": "application/json" },
-              { "key": "Authorization", "value": "Bearer {{jwtToken}}" }
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Technology\",\n  \"description\": \"Tech trivia questions\"\n}"
+              "raw": "{\n  \"name\": \"Custom Category\",\n  \"description\": \"Managed by admin\"\n}"
             },
             "url": "{{baseUrl}}/categories"
           }
@@ -104,11 +123,11 @@
             "method": "PUT",
             "header": [
               { "key": "Content-Type", "value": "application/json" },
-              { "key": "Authorization", "value": "Bearer {{jwtToken}}" }
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Technology Updated\",\n  \"description\": \"Updated description\"\n}"
+              "raw": "{\n  \"name\": \"Custom Category Updated\",\n  \"description\": \"Updated description\"\n}"
             },
             "url": "{{baseUrl}}/categories/{{categoryId}}"
           }
@@ -117,47 +136,123 @@
           "name": "Delete Category (Admin)",
           "request": {
             "method": "DELETE",
-            "header": [
-              { "key": "Authorization", "value": "Bearer {{jwtToken}}" }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
             "url": "{{baseUrl}}/categories/{{categoryId}}"
           }
         }
       ]
     },
     {
-      "name": "Questions",
+      "name": "Questions (Public)",
       "item": [
         {
-          "name": "Get Questions",
+          "name": "Get Questions (No Filter)",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/questions?amount=10&page=1&limit=10&difficulty=easy&type=multiple"
+            "url": "{{baseUrl}}/questions?amount=10&page=1&limit=10"
           }
         },
         {
-          "name": "Create Question (Admin)",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "const json = pm.response.json();",
-                  "if (json._id) { pm.collectionVariables.set('questionId', json._id); }"
-                ],
-                "type": "text/javascript"
-              }
+          "name": "Get Questions (Category + Difficulty + Type)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/questions?amount=10&category=69a920743f2cce5e79e343ae&difficulty=hard&type=multiple&page=1&limit=10"
+          }
+        },
+        {
+          "name": "Get Questions (Category Name)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/questions?amount=10&category=Technology&page=1&limit=10"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Questions (User Own)",
+      "item": [
+        {
+          "name": "Get My Questions",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{userToken}}" }],
+            "url": "{{baseUrl}}/questions/my?page=1&limit=20"
+          }
+        },
+        {
+          "name": "Create My Question",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "const json = pm.response.json();",
+                "if (json._id) pm.collectionVariables.set('userQuestionId', json._id);"
+              ]
             }
-          ],
+          }],
           "request": {
             "method": "POST",
             "header": [
               { "key": "Content-Type", "value": "application/json" },
-              { "key": "Authorization", "value": "Bearer {{jwtToken}}" }
+              { "key": "Authorization", "value": "Bearer {{userToken}}" }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"category\": \"{{categoryId}}\",\n  \"type\": \"multiple\",\n  \"difficulty\": \"easy\",\n  \"question\": \"What color is the sky on a clear day?\",\n  \"correct_answer\": \"Blue\",\n  \"incorrect_answers\": [\"Green\", \"Red\", \"Yellow\"]\n}"
+              "raw": "{\n  \"category\": \"69a920743f2cce5e79e343ae\",\n  \"type\": \"multiple\",\n  \"difficulty\": \"medium\",\n  \"question\": \"What does API stand for?\",\n  \"correct_answer\": \"Application Programming Interface\",\n  \"incorrect_answers\": [\"App Program Integration\", \"Applied Protocol Interface\", \"Automated Programming Input\"]\n}"
+            },
+            "url": "{{baseUrl}}/questions/my"
+          }
+        },
+        {
+          "name": "Update My Question",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{userToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"difficulty\": \"hard\",\n  \"question\": \"What does API stand for in software engineering?\",\n  \"correct_answer\": \"Application Programming Interface\",\n  \"incorrect_answers\": [\"App Program Integration\", \"Applied Protocol Interface\", \"Automated Programming Input\"]\n}"
+            },
+            "url": "{{baseUrl}}/questions/my/{{userQuestionId}}"
+          }
+        },
+        {
+          "name": "Delete My Question",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{userToken}}" }],
+            "url": "{{baseUrl}}/questions/my/{{userQuestionId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Questions (Admin)",
+      "item": [
+        {
+          "name": "Create Question (Admin)",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "const json = pm.response.json();",
+                "if (json._id) pm.collectionVariables.set('adminQuestionId', json._id);"
+              ]
+            }
+          }],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"category\": \"69a920743f2cce5e79e343ac\",\n  \"type\": \"boolean\",\n  \"difficulty\": \"easy\",\n  \"question\": \"The Earth revolves around the Sun.\",\n  \"correct_answer\": \"True\",\n  \"incorrect_answers\": [\"False\"]\n}"
             },
             "url": "{{baseUrl}}/questions"
           }
@@ -168,23 +263,21 @@
             "method": "PUT",
             "header": [
               { "key": "Content-Type", "value": "application/json" },
-              { "key": "Authorization", "value": "Bearer {{jwtToken}}" }
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"difficulty\": \"medium\",\n  \"question\": \"What color is a clear daytime sky?\",\n  \"correct_answer\": \"Blue\",\n  \"incorrect_answers\": [\"Purple\", \"Orange\", \"Pink\"]\n}"
+              "raw": "{\n  \"difficulty\": \"medium\",\n  \"question\": \"Earth revolves around the Sun in our solar system.\",\n  \"correct_answer\": \"True\",\n  \"incorrect_answers\": [\"False\"]\n}"
             },
-            "url": "{{baseUrl}}/questions/{{questionId}}"
+            "url": "{{baseUrl}}/questions/{{adminQuestionId}}"
           }
         },
         {
           "name": "Delete Question (Admin)",
           "request": {
             "method": "DELETE",
-            "header": [
-              { "key": "Authorization", "value": "Bearer {{jwtToken}}" }
-            ],
-            "url": "{{baseUrl}}/questions/{{questionId}}"
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": "{{baseUrl}}/questions/{{adminQuestionId}}"
           }
         },
         {
@@ -193,11 +286,11 @@
             "method": "POST",
             "header": [
               { "key": "Content-Type", "value": "application/json" },
-              { "key": "Authorization", "value": "Bearer {{jwtToken}}" }
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"questions\": [\n    {\n      \"categoryName\": \"Sports\",\n      \"type\": \"boolean\",\n      \"difficulty\": \"easy\",\n      \"question\": \"Football is played with a round ball.\",\n      \"correct_answer\": \"False\",\n      \"incorrect_answers\": [\"True\"]\n    }\n  ]\n}"
+              "raw": "{\n  \"questions\": [\n    {\n      \"category\": \"69a920743f2cce5e79e343ae\",\n      \"type\": \"multiple\",\n      \"difficulty\": \"easy\",\n      \"question\": \"What is JSON?\",\n      \"correct_answer\": \"JavaScript Object Notation\",\n      \"incorrect_answers\": [\"Java Source Open Network\", \"Joined Syntax Of Nodes\", \"Java Serialized Object Name\"]\n    }\n  ]\n}"
             },
             "url": "{{baseUrl}}/questions/import"
           }
@@ -209,23 +302,19 @@
       "item": [
         {
           "name": "Generate Session Token",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "const json = pm.response.json();",
-                  "if (json.token) { pm.collectionVariables.set('sessionToken', json.token); }"
-                ],
-                "type": "text/javascript"
-              }
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "const json = pm.response.json();",
+                "if (json.token) pm.collectionVariables.set('sessionToken', json.token);"
+              ]
             }
-          ],
+          }],
           "request": {
             "method": "GET",
-            "header": [
-              { "key": "Authorization", "value": "Bearer {{jwtToken}}" }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
             "url": "{{baseUrl}}/token"
           }
         },
@@ -233,10 +322,27 @@
           "name": "Delete Session Token",
           "request": {
             "method": "DELETE",
-            "header": [
-              { "key": "Authorization", "value": "Bearer {{jwtToken}}" }
-            ],
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
             "url": "{{baseUrl}}/token/{{sessionToken}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Docs",
+      "item": [
+        {
+          "name": "Swagger JSON",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/docs.json"
+          }
+        },
+        {
+          "name": "Swagger UI",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/docs"
           }
         }
       ]

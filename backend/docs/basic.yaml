@@ -1,24 +1,88 @@
-openapi: 3.0.0
-info:
-  title: brainyquizy Trivia Endpoints
-  version: 1.0.0
-paths:
-  /api/auth/register:
-    post:
-      summary: Register user
-  /api/auth/login:
-    post:
-      summary: Login user
-  /api/categories:
-    get:
-      summary: Get categories
-    post:
-      summary: Create category (admin)
-  /api/questions:
-    get:
-      summary: Get trivia questions
-    post:
-      summary: Create question (admin)
-  /api/token:
-    get:
-      summary: Create session token
+/api/auth/register:
+  post:
+    summary: Register user
+    tags: [Auth]
+/api/auth/login:
+  post:
+    summary: Login user
+    tags: [Auth]
+/api/categories:
+  get:
+    summary: Get categories
+    tags: [Categories]
+  post:
+    summary: Create category (admin)
+    tags: [Categories]
+    security:
+      - bearerAuth: []
+/api/categories/{id}:
+  put:
+    summary: Update category (admin)
+    tags: [Categories]
+    security:
+      - bearerAuth: []
+  delete:
+    summary: Delete category (admin)
+    tags: [Categories]
+    security:
+      - bearerAuth: []
+/api/questions:
+  get:
+    summary: Get questions
+    tags: [Questions]
+  post:
+    summary: Create question (admin)
+    tags: [Questions]
+    security:
+      - bearerAuth: []
+/api/questions/{id}:
+  put:
+    summary: Update question (admin)
+    tags: [Questions]
+    security:
+      - bearerAuth: []
+  delete:
+    summary: Delete question (admin)
+    tags: [Questions]
+    security:
+      - bearerAuth: []
+/api/questions/import:
+  post:
+    summary: Import questions JSON (admin)
+    tags: [Questions]
+    security:
+      - bearerAuth: []
+/api/questions/my:
+  get:
+    summary: Get authenticated user's own questions
+    tags: [User Questions]
+    security:
+      - bearerAuth: []
+  post:
+    summary: Create a question as authenticated user
+    tags: [User Questions]
+    security:
+      - bearerAuth: []
+/api/questions/my/{id}:
+  put:
+    summary: Update authenticated user's own question
+    tags: [User Questions]
+    security:
+      - bearerAuth: []
+  delete:
+    summary: Delete authenticated user's own question
+    tags: [User Questions]
+    security:
+      - bearerAuth: []
+/api/token:
+  get:
+    summary: Create session token
+    tags: [Token]
+    security:
+      - bearerAuth: []
+/api/token/{token}:
+  delete:
+    summary: Delete session token
+    tags: [Token]
+    security:
+      - bearerAuth: []

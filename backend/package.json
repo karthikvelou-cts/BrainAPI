@@ -1,7 +1,7 @@
 {
-  "name": "brainapi-backend",
+  "name": "brainyquizy-backend",
   "version": "1.0.0",
-  "description": "brainyquizy trivia backend",
+  "description": "brainyquizy backend",
   "main": "server.js",
   "type": "module",
   "scripts": {

@@ -9,10 +9,10 @@
       <div class="relative z-10 max-w-3xl space-y-4">
         <p class="text-xs font-semibold uppercase tracking-[0.2em] text-white/80">brainyquizy</p>
         <h1 class="text-3xl font-extrabold leading-tight md:text-5xl">
-          Build, Browse, and Manage Trivia at Scale
+          Build, Browse, and Manage at Scale
         </h1>
         <p class="max-w-2xl text-sm text-white/90 md:text-base">
-          Modern trivia platform with public question APIs, category filtering, difficulty tuning, and secured admin controls.
+          Modern platform with public question APIs, category filtering, difficulty tuning, and secured admin controls.
         </p>
         <div class="flex flex-wrap gap-3 pt-2">
           <RouterLink

@@ -8,9 +8,9 @@ import { validateQuestionContentSafety } from "../utils/contentSafety.js";
 
 const transformQuestion = (questionDoc) => ({
   _id: questionDoc._id,
-  category: questionDoc.category?.name || "Unknown",
+  category: questionDoc.category?.name || "Admin",
   categoryId: questionDoc.category?._id,
-  createdBy: questionDoc.createdBy?.username || "Unknown",
+  createdBy: questionDoc.createdBy?.username || "Admin",
   createdById: questionDoc.createdBy?._id,
   type: questionDoc.type,
   difficulty: questionDoc.difficulty,

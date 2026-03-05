@@ -4,7 +4,7 @@
     <h3 class="mt-2 text-base font-semibold text-slate-800">{{ question.question }}</h3>
     <div class="mt-3 text-sm text-slate-600">
       <span class="font-semibold">Created By:</span>
-      {{ question.createdBy || "Unknown" }}
+      {{ question.createdBy || "Admin" }}
     </div>
   </div>
 </template>
